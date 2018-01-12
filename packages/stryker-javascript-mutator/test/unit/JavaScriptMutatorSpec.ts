@@ -115,6 +115,48 @@ describe('JavaScriptMutator', () => {
       });
     });
 
+    it('for Vue code', () => {
+      const mutator = new JavaScriptMutator(new Config());
+      const files: File[] = [
+        {
+          name: 'MyComponent.vue',
+          included: false,
+          mutated: true,
+          transpiled: false,
+          kind: FileKind.Text,
+          content: `
+          <template>
+            <span>{{ message }}</span>
+          </template>
+          
+          <script>
+            export default {
+              data () {
+                return {
+                  message: 'hello!'
+                }
+              },
+              doMath () {
+                return 1 - 2;
+              }
+            }
+          </script>
+          `
+        }
+      ];
+
+      const mutants = mutator.mutate(files);
+
+      expect(mutants.length).to.equal(1);
+      // TODO: Fix the expect below.
+      expect(mutants).to.deep.include({
+        mutatorName: 'IfStatement',
+        fileName: 'testFile.js',
+        range: [131, 138],
+        replacement: 'false'
+      });
+    });
+
     it('for multiple files', () => {
       let mutator = new JavaScriptMutator(new Config());
       let file: File = {

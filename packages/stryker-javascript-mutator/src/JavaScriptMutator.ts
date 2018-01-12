@@ -43,7 +43,7 @@ export default class JavaScriptMutator implements Mutator {
   }
 
   private hasValidExtension(file: TextFile): boolean {
-    return ['.js', '.jsx'].some(extension => path.extname(file.name) === extension);
+    return ['.js', '.jsx', '.vue'].some(extension => path.extname(file.name) === extension);
   }
 
   private generateMutants(nodes: babel.types.Node[], ast: babel.types.File, file: TextFile, mutatorName: string) {
