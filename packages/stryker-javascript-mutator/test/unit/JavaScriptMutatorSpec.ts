@@ -65,7 +65,7 @@ describe('JavaScriptMutator', () => {
       expect(mutants).to.deep.include({
         mutatorName: 'IfStatement',
         fileName: 'testFile.jsx',
-        range: [197, 202],
+        range: [211, 216],
         replacement: 'true'
       });
     });
@@ -110,7 +110,7 @@ describe('JavaScriptMutator', () => {
       expect(mutants).to.deep.include({
         mutatorName: 'IfStatement',
         fileName: 'testFile.js',
-        range: [131, 138],
+        range: [141, 148],
         replacement: 'false'
       });
     });
